@@ -210,7 +210,8 @@ public class AddressBook {
         showWelcomeMessage();
         if (args.length >= 2) {
             showToUser(MESSAGE_INVALID_PROGRAM_ARGS);
-            exitProgram();
+            showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
+            System.exit(0);
         }
 
         if (args.length == 1) {
@@ -292,7 +293,8 @@ public class AddressBook {
 
         if (!isValidFilePath(filePath)) {
             showToUser(String.format(MESSAGE_INVALID_FILE, filePath));
-            exitProgram();
+            showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
+            System.exit(0);
         }
 
         storageFilePath = filePath;
@@ -729,7 +731,8 @@ public class AddressBook {
             showToUser(String.format(MESSAGE_STORAGE_FILE_CREATED, filePath));
         } catch (IOException ioe) {
             showToUser(String.format(MESSAGE_ERROR_CREATING_STORAGE_FILE, filePath));
-            exitProgram();
+            showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
+            System.exit(0);
         }
     }
 
@@ -744,7 +747,8 @@ public class AddressBook {
         final Optional<ArrayList<String[]>> successfullyDecoded = decodePersonsFromStrings(getLinesInFile(filePath));
         if (!successfullyDecoded.isPresent()) {
             showToUser(MESSAGE_INVALID_STORAGE_FILE_CONTENT);
-            exitProgram();
+            showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
+            System.exit(0);
         }
         return successfullyDecoded.get();
     }
