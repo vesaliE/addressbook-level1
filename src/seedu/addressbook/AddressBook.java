@@ -22,6 +22,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /*
  * NOTE : =============================================================
@@ -484,8 +485,9 @@ public class AddressBook {
      */
     private static ArrayList<String[]> getPersonsWithNameContainingAnyKeyword(Collection<String> keywords) {
         final ArrayList<String[]> matchedPersons = new ArrayList<>();
+        keywords = keywords.stream().map(String::toLowerCase).collect(Collectors.toSet());
         for (String[] person : getAllPersonsInAddressBook()) {
-            final Set<String> wordsInName = new HashSet<>(splitByWhitespace(getNameFromPerson(person)));
+            final Set<String> wordsInName = new HashSet<>(splitByWhitespace(getNameFromPerson(person).toLowerCase()));
             if (!Collections.disjoint(wordsInName, keywords)) {
                 matchedPersons.add(person);
             }
